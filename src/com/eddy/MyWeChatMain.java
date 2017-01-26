@@ -3,7 +3,9 @@ package com.eddy;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.crypto.MacSpi;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +66,30 @@ public class MyWeChatMain extends HttpServlet {
 		for (String key : map.keySet()) {
 			logger.info("key: " + key);
 			logger.info(map.get(key));
+		}
+
+		TextMessage textMessage = new TextMessage();
+		textMessage.setToUserName(map.get("FromUserName"));
+		textMessage.setFromUserName(map.get("ToUserName"));
+		textMessage.setCreateTime(Long.parseLong(map.get("CreateTime")) + 3);
+		textMessage.setMsgType("text");
+		textMessage.setContent(map.get("Content"));
+		String responseXml = MessageUtil.messageToXML(textMessage);
+		logger.info("response xml: " + responseXml);
+
+		try {
+			// °Ñxml×Ö·û´®Ð´ÈëÏìÓ¦
+			byte[] xmlData = responseXml.getBytes();
+
+			response.setContentLength(xmlData.length);
+
+			ServletOutputStream os = response.getOutputStream();
+			os.write(xmlData);
+
+			os.flush();
+			os.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
