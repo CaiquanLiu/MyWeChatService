@@ -13,6 +13,10 @@ import org.apache.log4j.Logger;
 public class Util {
 	private static Logger logger = Logger.getLogger(MyWeChatMain.class);
 
+	/**
+	 * display request parameter from Get/Post
+	 * @param request
+	 */
 	static public void showParams(HttpServletRequest request) {
 		Map map = new HashMap();
 		Enumeration paramNames = request.getParameterNames();
@@ -39,29 +43,11 @@ public class Util {
 		logger.info("------------------------------");
 	}
 
-	static public String getDoc(HttpServletRequest request) throws Exception {
-		char[] readerBuffer = new char[request.getContentLength()];
-		BufferedReader bufferedReader = request.getReader();
-
-		// Logger.info("开始处理上传数据");
-		int portion = bufferedReader.read(readerBuffer);
-		int amount = portion;
-		while (amount < readerBuffer.length) {
-			portion = bufferedReader.read(readerBuffer, amount, readerBuffer.length - amount);
-			amount = amount + portion;
-		}
-
-		StringBuffer stringBuffer = new StringBuffer((int) (readerBuffer.length * 1.5));
-		for (int index = 0; index < readerBuffer.length; index++) {
-			char c = readerBuffer[index];
-			stringBuffer.append(c);
-		}
-
-		String xml = new String(stringBuffer.toString().getBytes(), "utf-8");
-		// logger.info(xml);
-		return xml;
-	}
-
+	/**
+	 * get XML data from Post request
+	 * @param request
+	 * @return
+	 */
 	static public String getPostData(HttpServletRequest request) {
 		StringBuffer sb = new StringBuffer();
 		String line = null;
@@ -75,4 +61,32 @@ public class Util {
 
 		return sb.toString();
 	}
+	
+//	static public String toXML(){  
+//        XStream xStream = new XStream();  
+//        Person person = new Person();  
+//        person.setName("rojer");  
+//        person.setPhoneNuber(999);  
+//        Address address1 = new Address();  
+//        address1.setHouseNo(888);  
+//        address1.setStreet("newyork");  
+//        Address address2 = new Address();  
+//        address2.setHouseNo(76767);  
+//        address2.setStreet("toyo");  
+//        person.getAddresses().add(address1);  
+//        person.getAddresses().add(address2);  
+////        xStream.alias("person", Person.class);  
+////        xStream.alias("address",Address.class);  
+//        xStream.setMode(XStream.NO_REFERENCES);  
+////        xStream.addImplicitCollection(Person.class, "addresses");  
+////        xStream.useAttributeFor(Person.class,"name");  
+//        //注册使用了注解的VO  
+//        xStream.processAnnotations(new Class[]{Person.class,Address.class});  
+//        String xml = xStream.toXML(person);  
+//  
+//        System.out.println(xml);  
+//        return xml;  
+//    }  
+	
+	 
 }

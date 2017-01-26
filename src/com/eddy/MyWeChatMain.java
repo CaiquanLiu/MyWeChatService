@@ -1,6 +1,7 @@
 package com.eddy;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-
-import com.sun.jndi.toolkit.ctx.StringHeadTail;
 
 /**
  * Servlet implementation class MyWeChatMain
@@ -43,6 +42,7 @@ public class MyWeChatMain extends HttpServlet {
 			return;
 		}
 		response.getWriter().write(echostr);
+
 	}
 
 	/**
@@ -50,20 +50,20 @@ public class MyWeChatMain extends HttpServlet {
 	 *      response)
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("doPost: ");
-		Util.showParams(request);
+		HashMap<String, String> map = null;
+		try {
+			map = MessageUtil.parseXML(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		logger.info("xml content: ");
-		String xmlContent = "";
-		// try {
-		// xmlContent = Util.getDoc(request);
-		// } catch (Exception e) {
-		// // TODO: handle exception
-		// e.printStackTrace();
-		// }
+		if (map == null) {
+			logger.info("map is null");
+		}
 
-		xmlContent += Util.getPostData(request);
-		logger.info(xmlContent);
+		for (String key : map.keySet()) {
+			logger.info("key: " + key);
+			logger.info(map.get(key));
+		}
 	}
-
 }
