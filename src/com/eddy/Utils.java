@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-public class Util {
+public class Utils {
 	private static Logger logger = Logger.getLogger(MyWeChatMain.class);
 
 	/**

@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.eddy.wechat.MessageUtil;
+import com.eddy.wechat.TextMessage;
+
 /**
  * Servlet implementation class MyWeChatMain
  */
@@ -36,7 +39,7 @@ public class MyWeChatMain extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("doGet: ");
-		Util.showParams(request);
+		Utils.showParams(request);
 
 		// for WeChat developer URL binding
 		String echostr = request.getParameter("echostr");

@@ -1,4 +1,4 @@
-package com.eddy;
+package com.eddy.wechat;
 
 import java.io.InputStream;
 import java.io.Writer;

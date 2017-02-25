@@ -1,4 +1,4 @@
-package com.eddy;
+package com.eddy.wechat;
 /**
  * 
  * @author »ÆÂ··É
