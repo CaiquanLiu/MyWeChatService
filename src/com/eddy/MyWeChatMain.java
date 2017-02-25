@@ -44,7 +44,7 @@ public class MyWeChatMain extends HttpServlet {
 		// for WeChat developer URL binding
 		String echostr = request.getParameter("echostr");
 		if (echostr == null) {
-			return;
+			response.getWriter().write("this is MyWeChatService!");
 		}
 		response.getWriter().write(echostr);
 
