@@ -86,8 +86,8 @@ public class MyWeChatMain extends HttpServlet {
 
 		// 打印消息请求内容
 		for (String key : map.keySet()) {
-			logger.info("key: " + key);
-			logger.info(map.get(key));
+			logger.info("wechat request parameter:");
+			logger.info(key + ":" + map.get(key));
 		}
 
 		// 根据消息类别进行分类处理

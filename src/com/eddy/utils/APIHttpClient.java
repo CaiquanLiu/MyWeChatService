@@ -21,7 +21,8 @@ import org.apache.http.util.EntityUtils;
 import net.sf.json.JSONArray;
 
 /**
- * 代码参考：https://www.oschina.net/code/snippet_242695_20850
+ * HttpClient 代码参考：https://www.oschina.net/code/snippet_242695_20850
+ * 
  * @author Administrator
  *
  */
@@ -61,11 +62,11 @@ public class APIHttpClient {
 	 */
 	public String post(String parameters) {
 		String body = null;
-		logger.info("parameters:" + parameters);
+		logger.info("post parameters:" + parameters);
 
 		if (method != null && parameters != null && !"".equals(parameters.trim())) {
-//			JSONArray jsonObject = JSONArray.fromObject(parameters);
-//			logger.info("json:" + jsonObject.toString());
+			// JSONArray jsonObject = JSONArray.fromObject(parameters);
+			// logger.info("json:" + jsonObject.toString());
 			try {
 
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
