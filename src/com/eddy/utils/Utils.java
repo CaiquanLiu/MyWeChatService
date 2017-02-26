@@ -1,4 +1,4 @@
-package com.eddy;
+package com.eddy.utils;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+
+import com.eddy.MyWeChatMain;
 
 public class Utils {
 	private static Logger logger = Logger.getLogger(MyWeChatMain.class);

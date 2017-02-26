@@ -3,9 +3,7 @@ package com.eddy;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.crypto.MacSpi;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +19,8 @@ import com.eddy.requestprocess.shortvideo.ShortVideoProcess;
 import com.eddy.requestprocess.text.TextProcess;
 import com.eddy.requestprocess.video.VideoProcess;
 import com.eddy.requestprocess.voice.VoiceProcess;
+import com.eddy.utils.Utils;
 import com.eddy.wechat.MessageUtil;
-import com.eddy.wechat.TextMessage;
 
 /**
  * Servlet implementation class MyWeChatMain
