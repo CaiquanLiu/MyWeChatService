@@ -13,6 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.eddy.requestprocess.IRequestProcess;
+import com.eddy.requestprocess.image.ImageProcess;
+import com.eddy.requestprocess.link.LinkProcess;
+import com.eddy.requestprocess.location.LocationProcess;
+import com.eddy.requestprocess.shortvideo.ShortVideoProcess;
+import com.eddy.requestprocess.text.TextProcess;
+import com.eddy.requestprocess.video.VideoProcess;
+import com.eddy.requestprocess.voice.VoiceProcess;
 import com.eddy.wechat.MessageUtil;
 import com.eddy.wechat.TextMessage;
 
@@ -21,6 +29,16 @@ import com.eddy.wechat.TextMessage;
  */
 @WebServlet("/MyWeChatMain")
 public class MyWeChatMain extends HttpServlet {
+	// 微信消息定义
+	private static final String MSG_TYPE = "MsgType";
+	private static final String MSG_TYPE_TEXT = "text";
+	private static final String MSG_TYPE_IMAGE = "image";
+	private static final String MSG_TYPE_VOICE = "voice";
+	private static final String MSG_TYPE_VIDEO = "video";
+	private static final String MSG_TYPE_SHORT_VIDEO = "shortvideo";
+	private static final String MSG_TYPE_LOCATION = "location";
+	private static final String MSG_TYPE_LINK = "link";
+
 	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(MyWeChatMain.class);
@@ -55,6 +73,7 @@ public class MyWeChatMain extends HttpServlet {
 	 *      response)
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// XML解析
 		HashMap<String, String> map = null;
 		try {
 			map = MessageUtil.parseXML(request);
@@ -64,35 +83,38 @@ public class MyWeChatMain extends HttpServlet {
 
 		if (map == null) {
 			logger.info("map is null");
+			return;
 		}
 
+		// 打印消息请求内容
 		for (String key : map.keySet()) {
 			logger.info("key: " + key);
 			logger.info(map.get(key));
 		}
 
-		TextMessage textMessage = new TextMessage();
-		textMessage.setToUserName(map.get("FromUserName"));
-		textMessage.setFromUserName(map.get("ToUserName"));
-		textMessage.setCreateTime(Long.parseLong(map.get("CreateTime")) + 3);
-		textMessage.setMsgType("text");
-		textMessage.setContent(map.get("Content"));
-		String responseXml = MessageUtil.messageToXML(textMessage);
-		logger.info("response xml: " + responseXml);
+		// 根据消息类别进行分类处理
+		if (map.containsKey(MSG_TYPE)) {
+			IRequestProcess requestProcess = null;
+			String msgType = map.get(MSG_TYPE);
+			if (msgType.equals(MSG_TYPE_TEXT)) {
+				requestProcess = new TextProcess();
+			} else if (msgType.equals(MSG_TYPE_IMAGE)) {
+				requestProcess = new ImageProcess();
+			} else if (msgType.equals(MSG_TYPE_VOICE)) {
+				requestProcess = new VoiceProcess();
+			} else if (msgType.equals(MSG_TYPE_VIDEO)) {
+				requestProcess = new VideoProcess();
+			} else if (msgType.equals(MSG_TYPE_SHORT_VIDEO)) {
+				requestProcess = new ShortVideoProcess();
+			} else if (msgType.equals(MSG_TYPE_LOCATION)) {
+				requestProcess = new LocationProcess();
+			} else if (msgType.equals(MSG_TYPE_LINK)) {
+				requestProcess = new LinkProcess();
+			}
 
-		try {
-			// ��xml�ַ���д����Ӧ
-			byte[] xmlData = responseXml.getBytes();
-
-			response.setContentLength(xmlData.length);
-
-			ServletOutputStream os = response.getOutputStream();
-			os.write(xmlData);
-
-			os.flush();
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			if (requestProcess != null) {
+				requestProcess.requestProcess(map, response);
+			}
 		}
 	}
 }
