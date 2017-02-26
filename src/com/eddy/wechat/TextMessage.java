@@ -1,11 +1,5 @@
 package com.eddy.wechat;
 
-/**
- * 
- * @author 黄路飞
- *
- * @data 2016年6月18日20:59:27
- */
 public class TextMessage extends BaseMessage {
     private String Content;
 

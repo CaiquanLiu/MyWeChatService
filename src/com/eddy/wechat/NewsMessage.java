@@ -2,12 +2,6 @@ package com.eddy.wechat;
 
 import java.util.List;
 
-/**
- * 
- * @author 黄路飞
- *
- * @data 2016年6月18日21:31:41
- */
 public class NewsMessage extends BaseMessage {
 	private int ArticleCount;
 	private List<Article> Articles;

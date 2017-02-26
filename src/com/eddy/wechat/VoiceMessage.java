@@ -1,11 +1,5 @@
 package com.eddy.wechat;
 
-/**
- * 
- * @author 黄路飞
- *
- * @data 2016年6月18日21:26:16
- */
 public class VoiceMessage extends BaseMessage {
     private Voice Voice;
 

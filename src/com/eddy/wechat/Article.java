@@ -1,11 +1,5 @@
 package com.eddy.wechat;
 
-/**
- * 
- * @author 黄路飞
- *
- * @data 2016年6月18日21:31:59
- */
 public class Article {
     private String Title;
     private String Description;
