@@ -6,12 +6,15 @@ import java.util.HashMap;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import com.eddy.GeneralAI;
+import com.eddy.interfaces.IAIProcess;
 import com.eddy.requestprocess.IRequestProcess;
 import com.eddy.turing.Turing;
 import com.eddy.wechat.MessageUtil;
 import com.eddy.wechat.TextMessage;
 
 public class TextProcess implements IRequestProcess {
+	private IAIProcess mAIProcess = new GeneralAI();
 
 	@Override
 	public void requestProcess(HashMap<String, String> request, HttpServletResponse response) {
@@ -46,9 +49,7 @@ public class TextProcess implements IRequestProcess {
 	 * @return
 	 */
 	private String process(String request) {
-		// TODO:添加处理过程
-		Turing turing = new Turing(false);
-		String rst = turing.process(request);
+		String rst = mAIProcess.process(request);
 
 		if (rst == null) {
 			rst = "Turing request is failed!";
