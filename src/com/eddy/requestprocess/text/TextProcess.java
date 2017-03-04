@@ -47,11 +47,11 @@ public class TextProcess implements IRequestProcess {
 	 */
 	private String process(String request) {
 		// TODO:添加处理过程
-		Turing turing = new Turing();
-		String rst = turing.request(request);
-		
-		if(rst==null){
-			rst="Turing request is failed!";
+		Turing turing = new Turing(false);
+		String rst = turing.process(request);
+
+		if (rst == null) {
+			rst = "Turing request is failed!";
 		}
 		return rst;
 		// return request;
