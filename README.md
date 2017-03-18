@@ -1,4 +1,5 @@
 # 基于Tomcat+Servlet的个人微信公众号服务后台
+个人微信公众号“才权的AI小助手”后台服务
 
 ## 博客地址：
 <http://www.jianshu.com/u/bf03aa158e75>
