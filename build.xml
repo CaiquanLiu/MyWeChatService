@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project basedir="." default="war" name="hb_portal">
+	
+	<target name="init">
+		<!-- tomcat项目目录 -->
+		<property name="tomcat.dir" value="/opt/apache-tomcat-9.0.0/webapps"/>
+		<property name="servive_name" value="Eddy的AI小助手" />
+		<property name="version" value="0.1" />
+		<property name="year" value="2017" />
+		<property name="author" value="eddy.liu.2011@gmail.com" />
+		<echo message="----------${servive_name} ${version} [${year}]  by [${author}]----" />
+		<property name="deprecation" value="on" />  
+		<property name="src.dir" value="${basedir}/src" />  
+		<property name="webapp.dir" value="${basedir}/WebContent" /> 
+		<property name="lib.dir" value="${webapp.dir}/WEB-INF/lib" />
+		<property name="war.dest" value="${basedir}/build/war" />  
+		<property name="build.src" value="${basedir}/build/src" />  
+		<property name="build.dest" value="${basedir}/build/dest" />  
+		   
+		<path id="classpath">   
+			<fileset dir="${lib.dir}">  
+		   		<include name="**/*.jar"/>  
+		   </fileset>  
+		</path>  
+	</target>
+	
+	<target name="clean" depends="init">  
+			<delete dir="${build.src}"/>  
+			<delete dir="${build.dest}"/>  
+			<delete dir="${war.dest}"/>  
+		 </target>  
+		
+		<target name="prepare-src" depends="clean">  
+			<mkdir dir="${build.src}" />  
+			<mkdir dir="${build.dest}" />  
+			<mkdir dir="${build.dest}/WEB-INF" />
+			<mkdir dir="${build.dest}/WEB-INF/classes" />
+			<mkdir dir="${war.dest}" />  
+			
+		<!-- copy src files -->  
+		<copy todir="${build.src}">  
+			<fileset dir="${src.dir}" />  
+		</copy>  
+		
+		<copy todir="${build.dest}">  
+			<fileset dir="${webapp.dir}" />  
+		</copy>  
+	</target>  
+	 
+	<target name="build" depends="prepare-src">  
+		<javac srcdir="${build.src}" destdir="${build.dest}/WEB-INF/classes" encoding="UTF-8">  
+			<classpath refid="classpath" />  
+		</javac> 
+		 
+		<copy todir="${build.dest}/WEB-INF/classes">  
+			<fileset dir="${build.src}" >  
+			<include name="**/*.xml"/>  
+			<include name="log4j.properties"/>
+			</fileset>  
+		</copy>  
+	</target>  
+	  
+	<!-- =================================================================== -->  
+	<!-- 打war包-->  
+	<!-- =================================================================== -->  
+	  
+	<target name="war" depends="build">  
+	<war warfile="${war.dest}/mywechat.war" webxml="${build.dest}/WEB-INF/web.xml">  
+		<fileset dir="${build.dest}">  
+		</fileset>  
+	</war>  
+	  
+	</target> 
+	
+	<!-- 部署到tomcat中 -->
+	<target name="deploy" depends="war">
+		<copy todir="${tomcat.dir}">  
+			<fileset dir="${war.dest}" />  
+		</copy>
+	</target> 
+
+</project>
