@@ -54,7 +54,9 @@ public class MyWeChatMain extends HttpServlet {
 	 *      response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("doGet: ");
+		logger.info("doGet: 1");
+		logger.debug("doGet: 1");
+		logger.error("doGet: 1");
 		Utils.showParams(request);
 
 		// for WeChat developer URL binding
@@ -71,6 +73,9 @@ public class MyWeChatMain extends HttpServlet {
 	 *      response)
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    logger.info("doPost is triggered! 1");
+	    logger.debug("doPost is triggered! 1");
+	    logger.error("doPost is triggered! 1");
 		// XML解析
 		HashMap<String, String> map = null;
 		try {
