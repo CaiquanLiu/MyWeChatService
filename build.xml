@@ -13,6 +13,8 @@
 		<property name="src.dir" value="${basedir}/src" />  
 		<property name="webapp.dir" value="${basedir}/WebContent" /> 
 		<property name="lib.dir" value="${webapp.dir}/WEB-INF/lib" />
+		<!--tomcat lib目录-->
+		<property name="tomcat.lib.dir" value="/opt/tomcat9.0.0/lib"/>
 		<property name="war.dest" value="${basedir}/build/war" />  
 		<property name="build.src" value="${basedir}/build/src" />  
 		<property name="build.dest" value="${basedir}/build/dest" />  
@@ -20,7 +22,10 @@
 		<path id="classpath">   
 			<fileset dir="${lib.dir}">  
 		   		<include name="**/*.jar"/>  
-		   </fileset>  
+		    </fileset>  
+			<fileset dir="${tomcat.lib.dir}">  
+		   		<include name="**/*.jar"/>  
+		    </fileset>
 		</path>  
 	</target>
 	
