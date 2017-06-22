@@ -1,1 +1,1 @@
-ant -f ./build.xml deploy
+ant -f ./build.xml war
