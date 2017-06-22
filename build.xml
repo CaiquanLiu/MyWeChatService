@@ -65,7 +65,7 @@
 	<!-- =================================================================== -->  
 	  
 	<target name="war" depends="build">  
-	<war warfile="${war.dest}/mywechat.war" webxml="${build.dest}/WEB-INF/web.xml">  
+	<war warfile="${war.dest}/MyWeChatService.war" webxml="${build.dest}/WEB-INF/web.xml">  
 		<fileset dir="${build.dest}">  
 		</fileset>  
 	</war>  
