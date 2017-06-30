@@ -12,6 +12,7 @@
 * 接入Turing机器人接口；
 * 完成Log4j的集成；
 * 实现基于HtmlParser的web页面爬取和内容分析；
+* 添加基于Ant的Jenkins自动化编译；
 
 ## 测试公众号:
 ![](./assets/MyAI_Wechat_QRC.PNG)
