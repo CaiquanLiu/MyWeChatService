@@ -2,7 +2,7 @@
 个人微信公众号“才权的AI小助手”后台服务
 
 ## 博客地址：
-<http://www.jianshu.com/u/bf03aa158e75>
+<https://caiquanliu.github.io/tags/Eddy%E7%9A%84AI%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85/>
 
 ## 实现功能：
 * 完成微信个人公众号的服务器地址绑定；
