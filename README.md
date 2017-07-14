@@ -14,6 +14,15 @@
 * 实现基于HtmlParser的web页面爬取和内容分析；
 * 添加基于Ant的Jenkins自动化编译；
 
+## 环境/依赖：
+* 运行主机：阿里云ECS；
+* 宿主系统：Ubuntu 16.04；
+* JDK：1.8；
+* Web Server：Tomcat；
+* Log组件：Log4j；
+* Html页面解析组件：HtmlParser；
+* 自动化编译：Jenkins+Ant；
+
 ## 测试公众号:
 ![](./assets/MyAI_Wechat_QRC.PNG)
 
